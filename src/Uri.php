@@ -43,8 +43,16 @@ class Uri implements Stringable
     /**
      * Uri constructor.
      */
-    protected function __construct(string $scheme, string $user = '', string $pass = '', string $host = '', string $port = '', string $path = '', string $query = '', string $fragment = '')
-    {
+    protected function __construct(
+        string $scheme,
+        string $user = '',
+        string $pass = '',
+        string $host = '',
+        string $port = '',
+        string $path = '',
+        string $query = '',
+        string $fragment = ''
+    ) {
         $this->scheme = $scheme;
         $this->user = $user;
         $this->pass = $pass;
