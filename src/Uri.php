@@ -91,7 +91,7 @@ class Uri implements Stringable
             $parts['user'] ?? '',
             $parts['pass'] ?? '',
             $parts['host'] ?? '',
-            (string) ($parts['port'] ?? self::$defaultSchemePort[$scheme] ?? ''),
+            (string) ($parts['port'] ?? ''),
             $parts['path'] ?? '',
             $parts['query'] ?? '',
             rawurlencode(rawurldecode($parts['fragment'] ?? '')),
@@ -113,6 +113,22 @@ class Uri implements Stringable
     {
         $clone = clone $this;
         $clone->scheme = $scheme;
+
+        return $clone;
+    }
+
+    public function withUser(string $user): Uri
+    {
+        $clone = clone $this;
+        $clone->user = $user;
+
+        return $clone;
+    }
+
+    public function withPass(string $pass): Uri
+    {
+        $clone = clone $this;
+        $clone->pass = $pass;
 
         return $clone;
     }

@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "castor/std",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/castor-labs/std.git",
-                "reference": "59b1d0ed32ea5b16a363c937c2b125e798e9d7ed"
+                "reference": "614637c56e9465097866893b65730c1ed1bd3d53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/castor-labs/std/zipball/59b1d0ed32ea5b16a363c937c2b125e798e9d7ed",
-                "reference": "59b1d0ed32ea5b16a363c937c2b125e798e9d7ed",
+                "url": "https://api.github.com/repos/castor-labs/std/zipball/614637c56e9465097866893b65730c1ed1bd3d53",
+                "reference": "614637c56e9465097866893b65730c1ed1bd3d53",
                 "shasum": ""
             },
             "require": {
@@ -54,9 +54,9 @@
             ],
             "support": {
                 "issues": "https://github.com/castor-labs/std/issues",
-                "source": "https://github.com/castor-labs/std/tree/0.1.0"
+                "source": "https://github.com/castor-labs/std/tree/0.1.1"
             },
-            "time": "2021-07-06T22:58:31+00:00"
+            "time": "2021-07-08T17:09:59+00:00"
         }
     ],
     "packages-dev": [

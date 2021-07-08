@@ -64,4 +64,11 @@ class UriTest extends TestCase
             ['://example.com/protocol-relative-url'],
         ];
     }
+
+    public function testItMutatesPath(): void
+    {
+        $uri = Uri::parse('https://example.com');
+        self::assertSame('https://example.com/login', $uri->withPath('/login')->toStr());
+        self::assertSame('https://example.com', $uri->toStr());
+    }
 }
