@@ -13,4 +13,4 @@ composer require castor/uri
 
 ## Documentation
 
-Documentation is available in Markdown format [here](docs/00-intro.md).
+Documentation is available in Markdown format [here](docs/README.md).
