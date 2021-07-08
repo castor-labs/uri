@@ -27,7 +27,7 @@ use PHPUnit\Framework\TestCase;
 class UriTest extends TestCase
 {
     /**
-     * @dataProvider getUris
+     * @dataProvider getValidUris
      *
      * @throws InvalidUri
      */
@@ -36,7 +36,18 @@ class UriTest extends TestCase
         self::assertSame($parsed, Uri::parse($uri)->toStr());
     }
 
-    public function getUris(): array
+    /**
+     * @dataProvider  getInvalidUris
+     *
+     * @throws InvalidUri
+     */
+    public function testInvalidUris(string $uri): void
+    {
+        $this->expectException(InvalidUri::class);
+        Uri::parse($uri);
+    }
+
+    public function getValidUris(): array
     {
         return [
             ['https://example.com', 'https://example.com'],
@@ -44,6 +55,13 @@ class UriTest extends TestCase
             ['ftp://user:pass@some.host/file.txt', 'ftp://user:pass@some.host/file.txt'],
             ['tel:+1-816-555-1212', 'tel:+1-816-555-1212'],
             ['mailto:John.Doe@example.com', 'mailto:John.Doe@example.com'],
+        ];
+    }
+
+    public function getInvalidUris(): array
+    {
+        return [
+            ['://example.com/protocol-relative-url'],
         ];
     }
 }

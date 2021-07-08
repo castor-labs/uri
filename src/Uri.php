@@ -82,6 +82,10 @@ class Uri implements Stringable
 
         $scheme = Str\toLower($parts['scheme'] ?? '');
 
+        if ('' === $scheme) {
+            throw new InvalidUri('Uri must have a scheme');
+        }
+
         return new self(
             $scheme,
             $parts['user'] ?? '',
