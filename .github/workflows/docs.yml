@@ -1,0 +1,54 @@
+name: "Documentation"
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths: [".castor/docs/**"]
+
+jobs:
+  sync:
+    name: "Sync"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v3
+        with:
+          path: 'src'
+          persist-credentials: false
+      - name: Checkout Documentation
+        uses: actions/checkout@v3
+        with:
+          path: 'dest'
+          ref: 'main'
+          repository: 'castor-labs/docs'
+          token: ${{ secrets.ORG_GITHUB_TOKEN }}
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Copy Files
+        shell: bash
+        run: |
+          mkdir -p dest/"${GITHUB_REPOSITORY/castor-labs\/}"
+          mkdir -p src/.castor/docs
+          cp -rvT src/.castor/docs/ dest/src/packages/"${GITHUB_REPOSITORY/castor-labs\/}"
+      - name: Check New Files
+        id: files-check
+        shell: bash
+        working-directory: dest
+        run: |
+          git add -A
+          git status --porcelain | wc -l
+          if [[ $(git status --porcelain | wc -l) -gt 0 ]]; then
+            echo "::set-output name=has-new-files::true"
+          else
+            echo "::set-output name=has-new-files::false"
+          fi
+      - name: Push New Files
+        if: ${{ steps.files-check.outputs.has-new-files == 'true' }}
+        shell: bash
+        working-directory: dest
+        run: |
+          git config --global user.name "Castor Labs Automation"
+          git config --global user.email "automation@castor-labs.dev"
+          git commit -m "chore(auto-update): from $GITHUB_REPOSITORY@${{ github.sha }}"
+          git push
